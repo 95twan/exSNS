@@ -6,6 +6,8 @@ const session = require('express-session');
 const flash = require('connect-flash');
 require('dotenv').config();
 
+const pageRouter = require('./routes/page')
+
 const app = express();
 
 app.set('views', path.join(__dirname, 'views'));
@@ -28,6 +30,8 @@ app.use(session({
     },
 }));
 app.use(flash());
+
+app.use('/', pageRouter)
 
 app.listen(app.get('port'), () => {
     console.log(app.get('port'), '번 포트에서 대기 중');
