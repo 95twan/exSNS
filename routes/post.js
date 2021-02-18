@@ -53,4 +53,26 @@ router.post('/', isLoggedIn, upload2.none(), async (req, res, next) => {
     }
 })
 
+router.get('/hashtag', async (req, res, next) => {
+    const query = req.query.hashtag;
+    if (!query) {
+        return res.redirect('/');
+    }
+    try {
+        const hashtag = await Hashtag.findOne({ where: { title: query } });
+        let posts = [];
+        if (hashtag) {
+            posts = await hashtag.getPosts({ include: [{ model: User }] });
+        }
+        return res.render('main', {
+            title: `${query} | NodeSNS`,
+            user: req.user,
+            twits: posts,
+        })
+    } catch (err) {
+        console.error(err);
+        return next(err);
+    }
+})
+
 module.exports = router;
