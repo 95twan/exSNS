@@ -2,6 +2,8 @@
 # Created by https://www.toptal.com/developers/gitignore/api/osx,vscode,node
 # Edit at https://www.toptal.com/developers/gitignore?templates=osx,vscode,node
 
+uploads/
+
 ### Node ###
 # Logs
 logs
