@@ -16,12 +16,12 @@ db.Post.belongsToMany(db.Hashtag, { through: 'PostHashtag' });
 db.Hashtag.belongsToMany(db.Post, { through: 'PostHashtag' });
 db.User.belongsToMany(db.User, {
   foreignKey: 'followingId',
-  as: ' Followers',
+  as: 'Followers',
   through: 'Follow',
 });
 db.User.belongsToMany(db.User, {
   foreignKey: 'followerId',
-  as: ' Followings',
+  as: 'Followings',
   through: 'Follow',
 });
 
