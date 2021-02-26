@@ -36,7 +36,7 @@ if (process.env.NODE_ENV === 'production') {
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/img', express.static(path.join(__dirname, 'uploads')));
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }))
+app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser(process.env.COOKIE_SECRET));
 const sessionOption = {
     resave: false,
@@ -47,20 +47,11 @@ const sessionOption = {
         secure: false
     },
 }
-// if (process.env.NODE_ENV === 'production') {
-//     sessionOption.proxy = true; // https 사용시
-// }
+
 app.use(session(sessionOption));
 app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
-
-const staticURL = process.env.NODE_ENV === 'production' ? "http://13.209.35.12" : "http://127.0.0.1:8001"
-
-app.use((req, res, next) => {
-    res.locals.staticURL = staticURL;
-    next();
-});
 
 app.use('/', pageRouter);
 app.use('/auth', authRouter);
@@ -73,15 +64,15 @@ app.use((req, res, next) => {
     logger.info('hello');
     logger.error(err.message);
     next(err);
-})
+});
 
 app.use((err, req, res, next) => {
     res.locals.message = err.message;
     res.locals.error = req.app.get('env') === 'development' ? err : {};
     res.status(err.status || 500);
     res.render('error')
-})
+});
 
 app.listen(app.get('port'), () => {
     console.log(app.get('port'), '번 포트에서 대기 중');
-})
+});
