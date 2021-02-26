@@ -55,6 +55,13 @@ app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
 
+const staticURL = process.env.NODE_ENV === 'production' ? "http://13.209.35.12" : "http://127.0.0.1:8001"
+
+app.use((req, res, next) => {
+    res.locals.staticURL = staticURL;
+    next();
+});
+
 app.use('/', pageRouter);
 app.use('/auth', authRouter);
 app.use('/post', postRouter);
