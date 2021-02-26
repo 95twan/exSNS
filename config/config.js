@@ -5,7 +5,7 @@ module.exports = {
         username: 'root',
         password: process.env.SEQUELIZE_PASSWORD,
         database: 'nodeSNS',
-        host: process.env.RDS_HOST,
+        host: '127.0.0.1',
         dialect: 'mysql',
         operatorsAliases: false,
     },
