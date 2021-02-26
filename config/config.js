@@ -16,5 +16,6 @@ module.exports = {
         host: process.env.RDS_HOST,
         dialect: 'mysql',
         operatorsAliases: false,
+        logging: false,
     },
 }
