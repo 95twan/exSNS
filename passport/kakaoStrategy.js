@@ -15,7 +15,7 @@ module.exports = (passport) => {
                 done(null, exUser);
             } else {
                 const newUser = await User.create({
-                    email: profile._json && profile._json.kaccount_email,
+                    email: profile._json && profile._json.kakao_account.email,
                     nick: profile.displayName,
                     snsId: profile.id,
                     provider: 'kakao'
@@ -26,5 +26,5 @@ module.exports = (passport) => {
             console.error(err);
             done(err);
         }
-    }))
+    }));
 }
